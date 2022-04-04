@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="224px" height="217px" viewBox="0 0 224 217" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>BlackA@2x</title>
+    <g id="ArtPay-UI" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Artboard-Copy" transform="translate(-138.000000, -84.000000)">
+            <g id="BlackA" transform="translate(138.000000, 84.000000)">
+                <text id="A" font-family="Inter-Bold, Inter" font-size="150" font-weight="bold" letter-spacing="-6.26712329" fill="#000000">
+                    <tspan x="56" y="181">A</tspan>
+                </text>
+                <text id=")" transform="translate(120.500000, 44.500000) rotate(90.000000) translate(-120.500000, -44.500000) " font-family="Inter-Regular, Inter" font-size="150" font-weight="normal" letter-spacing="-6.26712329" fill="#000000">
+                    <tspan x="96" y="99">)</tspan>
+                </text>
+                <rect id="Rectangle" stroke="#000000" stroke-width="12" x="6" y="6" width="212" height="202"></rect>
+            </g>
+        </g>
+    </g>
+</svg>
