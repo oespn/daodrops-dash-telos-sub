@@ -32,7 +32,7 @@ import { daoList, daoListDD, pageUsers, getTopActiveMembers } from '../../../api
 import { searchUserByName } from '../../../api';
 import CampaignSelect from '../../Campaign/CampaignSelect'
 import { supabase } from '../../../utils/supabaseClient'
-import { useAirdropContract } from '../../Campaign/AirdropContract'
+// import { useAirdropContract } from '../../Campaign/AirdropContract'
 
 const DashboardDAO = (props) => {
   const {
@@ -173,11 +173,8 @@ const DashboardDAO = (props) => {
     setShow(!show)
   }
 
-
-
-  const contract = useAirdropContract();
   
-  const comp = <CampaignSelect selectedItems={selectedItems} rowCount={rowCount} contract={contract} />
+  const comp = <CampaignSelect selectedItems={selectedItems} rowCount={rowCount} />
 
   const selectAllEnabled = (mode == 'dao' && orgId) || mode == 'list'
 

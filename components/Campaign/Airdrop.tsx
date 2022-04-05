@@ -45,7 +45,7 @@ const AirdropCampaign = ( {option} ) => {
 
     // const { data, error } = useSWR(`/api/list/contract?listId=${listId}`, fetch)
 
-    //setAirDropContract(option);
+    setAirDropContract(option);
 
 
     const datestamp = new Date().toISOString();
@@ -58,13 +58,13 @@ const AirdropCampaign = ( {option} ) => {
       
     // res.status(200).send( { tidy } );
 
-    // setDownloadable(
-    //   {
-    //     mime: 'text/plain',
-    //     filename: `${datestamp}.sol`,
-    //     contents: airDropContract,
-    //    }
-    // );
+    setDownloadable(
+      {
+        mime: 'text/plain',
+        filename: `${datestamp}.sol`,
+        contents: airDropContract,
+       }
+    );
 
     setMessage({
       message: `Successfully created:`,
@@ -179,6 +179,7 @@ const AirdropCampaign = ( {option} ) => {
           {
             message && <div className={(message.type === 'success' ? 'bg-green-200' : 'bg-red-300') + ' p-3 mt-3 rounded-md'}>{message.message}</div>
           }
+          {!airDropContract ? <p></p> : <button formTarget="_blank" formAction="download" color="transparent"> Download {downloadable.filename}</button>}
           <pre>
             {airDropContract}
           </pre>

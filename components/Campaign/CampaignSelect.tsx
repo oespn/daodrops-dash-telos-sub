@@ -12,11 +12,13 @@ import { Tabs, TabList, Tab, TabPanel } from 'react-tabs';
 
 import 'react-tabs/style/react-tabs.css';
 import NewTargetList from "../Dashboard/Desktop/TargetList/NewTargetList";
+import useAirdropContract from './AirdropContract'
 
+const CampaignSelect = ({ selectedItems, rowCount }) => {
 
-const CampaignSelect = ({ selectedItems, rowCount, contract }) => {
+  // const [airDropContract, setAirDropContract] = useState(contract);
 
-  const [airDropContract, setAirDropContract] = useState(contract);
+  const airDropContract = useAirdropContract(selectedItems)
 
   const [selectedIdx, setSelectedIdx] = useState(undefined);
 
@@ -25,14 +27,18 @@ const CampaignSelect = ({ selectedItems, rowCount, contract }) => {
     // const selectedIdx = parseInt(index);
     setSelectedIdx(index);
   };
-  
+
+  useEffect(()=> {
+    console.log(airDropContract, 'airDropContract');
+  }, [airDropContract])
+
 
   const optionData = [
     {
       title: "Targeted airdrop",
       description: "Generate a smart contract for your DAO. Reward contributors or target accounts with your NFT or project tokens.",
       image: "/images/purple/undraw_air_support.svg",
-      form: <AirdropCampaign option={airDropContract}/>,
+      form: <AirdropCampaign option={airDropContract} />,
       link: 0
     },
     {
@@ -67,13 +73,13 @@ const CampaignSelect = ({ selectedItems, rowCount, contract }) => {
           <p className="text-gray-800 text-center">Add the {selectedItems.length} addresses selected</p>
           <TargetListBuilder selectedItems={selectedItems} />
           <p className="text-center">- OR - </p>
-          <NewTargetList selectedItems={selectedItems} selectSection={() => handleClick(2)}/>
+          <NewTargetList selectedItems={selectedItems} selectSection={() => handleClick(2)} />
         </TabPanel>
       </Tabs>
 
       {/*<NewTargetList selectedItems={selectedItems} selectSection={() => handleClick(2)} />*/}
 
-      <div className={`${tabIndex==1 && 'hidden'}`} >
+      <div className={`${tabIndex == 1 && 'hidden'}`} >
         <div className={`flex justify ${selectedIdx == undefined && 'hidden'}`} >
           <button className="flex justify-end w-full text-right text-primary" onClick={(e) => {
             e.preventDefault()
@@ -88,8 +94,8 @@ const CampaignSelect = ({ selectedItems, rowCount, contract }) => {
         <div className="">
           {optionData.map((option, index) => {
             return (
-             
-              <div key={index} > 
+
+              <div key={index} >
                 <div className={` ${(selectedIdx != undefined && selectedIdx != index) && 'hidden'}`}>
                   <CampaignOptionCard option={option} key={index} handleClick={() => handleClick(option.link)} isSelected={selectedIdx == index} />
                 </div>
