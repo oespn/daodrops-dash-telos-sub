@@ -1,26 +1,35 @@
-export function AirdropContract(data)  {
+import { useEffect, useState } from "react";
+import { supabase } from "../../utils/supabaseClient";
+
+//const useAirdropContract = () => {
   
-   //const [result, setRes] = useState([]);
+export function useAirdropContract () {
 
-    var recipients = "";     
+   const [result, setRes] = useState([]);
 
-//    const res =  getRecipients();
-    // const user_id = "19b68d16-7363-4f56-bd24-fe711ea63577";
-    // const res = supabase
-    // .from('targetlist')
-    // .select('*')
-    // .eq('created_by', user_id)
-    // .then(val => 
-    // { 
-    //     setRes(val.data); 
-    // })
+    let recipients = "";     
 
-    console.log(data);
+    useEffect(() => {
+    //    const res =  getRecipients();
+        const user_id = "19b68d16-7363-4f56-bd24-fe711ea63577";
+        const res = supabase
+        .from('targetlist')
+        .select('*')
+        .eq('created_by', user_id)
+        .then(val => 
+        { 
+            setRes(val.data); 
+        })
+    }
+    )
+    //console.log(data);
 
-    var addresses = [];
-    if (data) {
-        console.log(data);
-        data[0]?.targets.lists.map((row, index) => {
+
+
+    let addresses = [];
+    if (result) {
+        //console.log(data);
+        result[0]?.targets.lists.map((row, index) => {
             addresses.push(row.address);
         })
     
@@ -41,7 +50,7 @@ export function AirdropContract(data)  {
 
         console.log(recipients);
     }
-    var airDropContract = `
+    let airDropContract = `
     // SPDX-License-Identifier: GPL-3.0
     // NOT DESIGNED FOR PRODUCTION
     // THIS FILE CONTAINS OBVIOUS SECURITY ISSUES
@@ -80,3 +89,4 @@ export function AirdropContract(data)  {
     return airDropContract;
 
 }
+;

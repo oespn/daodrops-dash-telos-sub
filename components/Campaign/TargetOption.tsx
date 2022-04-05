@@ -5,7 +5,6 @@ import { createContext, useEffect, useState } from 'react'
 
 
 import { supabase } from '../../utils/supabaseClient'
-import { downloadRecipients } from '../../api'
 
 
 const TargetedOption = (props) => {
@@ -51,11 +50,6 @@ const TargetedOption = (props) => {
 
   const onSelectTargetList = (item) => {
     setSelectedList(item)
-  }
-
-  const downloadList = async () => {
-    const result = downloadRecipients(selectedList.id);
-    console.log(result);
   }
 
 

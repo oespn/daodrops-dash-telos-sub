@@ -58,13 +58,13 @@ const AirdropCampaign = ( {option} ) => {
       
     // res.status(200).send( { tidy } );
 
-    setDownloadable(
-      {
-        mime: 'text/plain',
-        filename: `${datestamp}.sol`,
-        contents: airDropContract,
-       }
-    );
+    // setDownloadable(
+    //   {
+    //     mime: 'text/plain',
+    //     filename: `${datestamp}.sol`,
+    //     contents: airDropContract,
+    //    }
+    // );
 
     setMessage({
       message: `Successfully created:`,

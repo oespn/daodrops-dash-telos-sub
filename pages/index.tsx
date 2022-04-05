@@ -69,10 +69,15 @@ export default function Home() {
       <MetaHead title="Amadao Login" />
       <section className="flex flex-col pt-30 text-center px-10 text-gray-700">
         <div className="md:max-w-sm">
+          <div className="mt-5">
+            <label className="h3">DAO Drops</label>
+            <p className="bold">powered by amadao.io</p>
+
+          </div>
           <div>
            <TourCarousel/>
           </div>
-          <p>Build your web3 CV &amp; start working at a DAO</p>
+
 
           {session ? <LoggedIn/> : <LoggedOut/>}
 

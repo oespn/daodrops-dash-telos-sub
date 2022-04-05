@@ -32,7 +32,7 @@ import { daoList, daoListDD, pageUsers, getTopActiveMembers } from '../../../api
 import { searchUserByName } from '../../../api';
 import CampaignSelect from '../../Campaign/CampaignSelect'
 import { supabase } from '../../../utils/supabaseClient'
-import { AirdropContract } from '../../Campaign/AirdropContract'
+import { useAirdropContract } from '../../Campaign/AirdropContract'
 
 const DashboardDAO = (props) => {
   const {
@@ -131,10 +131,6 @@ const DashboardDAO = (props) => {
       .eq('created_by', user_id)
 
     setTargetlists(res.data);
-
-    let contract = AirdropContract(targetlists);
-    setAirDropContract(contract);
-
   }
 
   useEffect(() => {
@@ -179,10 +175,9 @@ const DashboardDAO = (props) => {
 
 
 
-  const [airDropContract, setAirDropContract] = useState("");
-
-
-  const comp = <CampaignSelect selectedItems={selectedItems} rowCount={rowCount} contract={airDropContract} />
+  const contract = useAirdropContract();
+  
+  const comp = <CampaignSelect selectedItems={selectedItems} rowCount={rowCount} contract={contract} />
 
   const selectAllEnabled = (mode == 'dao' && orgId) || mode == 'list'
 

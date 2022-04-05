@@ -32,17 +32,20 @@ const LoggedOut = function () {
 
 
   return (
-    <div>
-
+  <div>
+    <div className="flex justify-center mt-5">
+      
       <button
         onClick={() => onboard()}
         className="flex bg-primary hover:bg-primary/90  px-5 py-2 text-white gap-1 items-center rounded-md font-medium"
       >
-        Use the Demo Account
+        Login to Demo Account
       </button>
-      {session ? <p>{session.user?.id}</p> : <p>no session</p> }
+    </div>
+    <div className="flex justify-center mt-5">    
       {!session ? <Auth /> : <Account key={session.user.id} session={session} />}
     </div>
+  </div>
   )
 
 

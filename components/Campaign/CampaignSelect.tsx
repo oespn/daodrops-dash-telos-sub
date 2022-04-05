@@ -16,7 +16,7 @@ import NewTargetList from "../Dashboard/Desktop/TargetList/NewTargetList";
 
 const CampaignSelect = ({ selectedItems, rowCount, contract }) => {
 
-  //const [contractData, setContractData] = useState(contract);
+  const [airDropContract, setAirDropContract] = useState(contract);
 
   const [selectedIdx, setSelectedIdx] = useState(undefined);
 
@@ -32,7 +32,7 @@ const CampaignSelect = ({ selectedItems, rowCount, contract }) => {
       title: "Targeted airdrop",
       description: "Generate a smart contract for your DAO. Reward contributors or target accounts with your NFT or project tokens.",
       image: "/images/purple/undraw_air_support.svg",
-      form: <AirdropCampaign option = {contract}/>,
+      form: <AirdropCampaign option={airDropContract}/>,
       link: 0
     },
     {
