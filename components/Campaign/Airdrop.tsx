@@ -7,14 +7,14 @@ import useSWR from 'swr';
 
 const amadao_ops_email = process.env.AMADAO_OPS_EMAIL;
 
-const AirdropCampaign = ( {option} ) => {
+const AirdropCampaign = ({ option }) => {
   const [message, setMessage] = useState(null);
   const [listId, setListId] = useState(0)
 
-  const [downloadable, setDownloadable ] = useState({
-     mime: 'text/plain',
-     filename: 'myexportedfile.txt',
-     contents: '',
+  const [downloadable, setDownloadable] = useState({
+    mime: 'text/plain',
+    filename: 'myexportedfile.txt',
+    contents: '',
   });
 
   console.log(option, "Data");
@@ -31,16 +31,15 @@ const AirdropCampaign = ( {option} ) => {
     defaultValues: {
       listId: 0,
       "title": '',
-      "type" : '',
+      "type": '',
       "currency": "",
       "amount": 0.00
     },
   });
 
 
-  
-  const onSubmit = () =>
-  {
+
+  const onSubmit = () => {
     //const response = downloadContract(0);
 
     // const { data, error } = useSWR(`/api/list/contract?listId=${listId}`, fetch)
@@ -55,7 +54,7 @@ const AirdropCampaign = ( {option} ) => {
     // res.setHeader('Content-Disposition', `attachment; filename=${filename}`);
 
     //   let tidy = airDropContract.replace("\r\n", String.fromCharCode(13));
-      
+
     // res.status(200).send( { tidy } );
 
     setDownloadable(
@@ -63,7 +62,7 @@ const AirdropCampaign = ( {option} ) => {
         mime: 'text/plain',
         filename: `${datestamp}.sol`,
         contents: airDropContract,
-       }
+      }
     );
 
     setMessage({
@@ -75,47 +74,61 @@ const AirdropCampaign = ( {option} ) => {
 
   const onSubmitAsync = async (data) => {
 
-      let html = `<div>
+    let html = `<div>
         <p><b>Title</b>: ${data.title}</p>
         <p><b>Type</b>: ${data.type}</p>
         <p><b>How paid</b>: ${data.how_paid}</p>
         <p><b>Currency</b>: ${data.currency}</p>
         <p><b>Amount</b>: ${data.amount}</p>
         `;
-      html += `/div>`;
-      
-      //api/list/contract?type=erc20&listId=0
-   
-      const response = downloadContract(0);
+    html += `/div>`;
 
-      // const response = await fetch('/api/launch-token', {
-      //   method: 'POST',
-      //   headers: {
-      //     'Accept': 'application/json',
-      //     'Content-Type': 'application/json'
-      //   },
-      //   body: JSON.stringify({
-      //     to: amadao_ops_email,
-      //     from: 'daodrops-demo0@gmail.com',
-      //     title: 'Airdrop created',
-      //     text: '',
-      //     html: html
-      //   })
-      // });
-      if (response) {
-        setMessage({
-          message: `Successfully created`,
-          type: 'success'
-        });
-        console.log(response.data);
-      } else {
-        setMessage({
-          message: `Error in creation`,
-          type: 'error'
-        });
-      }
+    //api/list/contract?type=erc20&listId=0
+
+    const response = downloadContract(0);
+
+    // const response = await fetch('/api/launch-token', {
+    //   method: 'POST',
+    //   headers: {
+    //     'Accept': 'application/json',
+    //     'Content-Type': 'application/json'
+    //   },
+    //   body: JSON.stringify({
+    //     to: amadao_ops_email,
+    //     from: 'daodrops-demo0@gmail.com',
+    //     title: 'Airdrop created',
+    //     text: '',
+    //     html: html
+    //   })
+    // });
+    if (response) {
+      setMessage({
+        message: `Successfully created`,
+        type: 'success'
+      });
+      console.log(response.data);
+    } else {
+      setMessage({
+        message: `Error in creation`,
+        type: 'error'
+      });
     }
-  
+  }
+
+  const downloadFile = async () => {
+
+    fetch('/api/list/contract?listId=0')
+      .then(response => response.blob())
+      .then(blob => {
+        let url = window.URL.createObjectURL(blob);
+        let a = document.createElement('a');
+        a.href = url;
+        a.download = downloadable.filename;
+        document.body.appendChild(a); // we need to append the element to the dom -> otherwise it will not work in firefox
+        a.click();    
+        a.remove();  //afterwards we remove the element again       
+      });
+  }
 
   return (
     <section className="px-3 mt-3 text-darky">
@@ -179,7 +192,7 @@ const AirdropCampaign = ( {option} ) => {
           {
             message && <div className={(message.type === 'success' ? 'bg-green-200' : 'bg-red-300') + ' p-3 mt-3 rounded-md'}>{message.message}</div>
           }
-          {!airDropContract ? <p></p> : <button formTarget="_blank" formAction="download" color="transparent"> Download {downloadable.filename}</button>}
+          {!airDropContract ? <p></p> : <button className="px-3 rounded-sm py-1 bg-primary text-white font-medium" onClick={() => downloadFile()} formTarget="_blank" formAction="download" color="transparent"> Download {downloadable.filename}</button>}
           <pre>
             {airDropContract}
           </pre>
